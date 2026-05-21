@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            color: #d63384;
+            padding: 50px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #yesBtn {
+            background-color: #ff69b4;
+            color: white;
+        }
+        #noBtn {
+            background-color: #ccc;
+            position: absolute;
+            transition: transform 0.2s ease;
+        }
+        .heart {
+    position: fixed;
+    font-size: 24px;
+    animation: floatUp 2s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-120px) scale(1.5);
+    }
+}
+
+    
+
+/* Shake on hover */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+#noBtn:hover {
+    animation: shake 0.2s;
+}
+
+        #message {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will you be my Valentine?</h1>
+    <div id="buttons">
+        <button id="yesBtn">Yes!</button>
+        <button id="noBtn">No</button>
+    </div>
+    <div id="message"></div>
+
+    <script>
+    const popSound = new Audio("https://www.soundjay.com/buttons/sounds/button-09.mp3");
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const messageDiv = document.getElementById('message');
+    const buttonsDiv = document.getElementById('buttons');
+
+    let attempts = 0;
+    let scale = 1;
+
+    const convincingMessages = [     
+        "Please? I promise to be the best Valentine ever!",
+        "You're breaking my heart! 😭",
+        "Please Lovelove, huhuhu",
+        "Pleaseeeeee",
+        "I beg you my loveeeeeee",
+        "Okay fine 😔"
+    ];
+    function createHeart(x, y) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = "❤️";
+
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 2000);
+}
+
+    function askAgain() {
+        attempts++;
+
+        // Message update
+        messageDiv.textContent =
+            convincingMessages[Math.min(attempts - 1, convincingMessages.length - 1)];
+
+        // Shrink button
+        scale *= 0.8;
+        const rotation = Math.random() * 360;
+
+        noBtn.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+
+        // Random position
+        const maxX = window.innerWidth - noBtn.offsetWidth;
+        const maxY = window.innerHeight - noBtn.offsetHeight;
+
+        noBtn.style.left = Math.random() * maxX + "px";
+        noBtn.style.top = Math.random() * maxY + "px";
+
+        // Final disappearance
+        if (scale < 0.25) {
+            noBtn.style.display = "none";
+            messageDiv.textContent = "WAHAHAHAHA, Hindi pwede and no😁😁";
+        }
+    }
+
+    yesBtn.addEventListener('click', (e) => {
+    popSound.play();
+
+    for (let i = 0; i < 20; i++) {
+        createHeart(
+            e.clientX + (Math.random() * 100 - 50),
+            e.clientY + (Math.random() * 100 - 50)
+        );
+    }
+
+    messageDiv.textContent = "Yay! You said YES! Happy Valentine’s Day ❤️🥰";
+    buttonsDiv.style.display = 'none';
+});
+
+
+    noBtn.addEventListener('click', askAgain);
+</script>
+
+</body>
+</html>
