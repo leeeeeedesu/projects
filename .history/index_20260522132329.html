@@ -79,12 +79,12 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
       (function(){
-        emailjs.init("N1CB1jFPFwHhcaFMg"); // replace with your EmailJS public key
+        emailjs.init("YOUR_PUBLIC_KEY"); // replace with your EmailJS public key
       })();
     </script>
 
     <script>
-    const popSound = new Audio("https://www.myinstants.com/en/instant/yaaaaaaaay-sound-effect/download/mp3/"); // Replace with your pop sound URL
+    const popSound = new Audio("https://www.soundjay.com/buttons/sounds/button-09.mp3");
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const messageDiv = document.getElementById('message');
@@ -116,16 +116,16 @@
     }, 2000);
 }
 document.getElementById("yesBtn").addEventListener("click", async () => {
-emailjs.send("service_a3l7jbq", "template_hkiv1l9", {
+emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
       response: "Yes to your proposal"
     });
-    then(() => {
+    .then(() => {
     alert("Email sent successfully!");
     })
     .catch((error) => {
         alert("Failed to send email: " + JSON.stringify(error));
-    });
-});
+  });
+  
     function askAgain() {
         attempts++;
 
@@ -149,7 +149,7 @@ emailjs.send("service_a3l7jbq", "template_hkiv1l9", {
         // Final disappearance
         if (scale < 0.25) {
             noBtn.style.display = "none";
-            messageDiv.textContent = "WAHAHAHAHA, Hindi pwede ang no po😁😁";
+            messageDiv.textContent = "WAHAHAHAHA, Hindi pwede and no😁😁";
         }
     }
 
