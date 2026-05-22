@@ -115,16 +115,16 @@
         heart.remove();
     }, 2000);
 }
-document.getElementById("yesBtn").addEventListener("click", () => {
-  emailjs.send("service_a3l7jbq", "template_hkiv1l9", {
-    response: "Yes to your proposal"
-  })
-  .then(() => {
+document.getElementById("yesBtn").addEventListener("click", async () => {
+emailjs.send("service_a3l7jbq", "template_hkiv1l9", {
+      response: "Yes to your proposal"
+    });
+    .then(() => {
     alert("Email sent successfully!");
-  })
-  .catch((error) => {
-    alert("Failed to send email: " + JSON.stringify(error));
-  });
+    })
+    .catch((error) => {
+        alert("Failed to send email: " + JSON.stringify(error));
+    });
 });
     function askAgain() {
         attempts++;
