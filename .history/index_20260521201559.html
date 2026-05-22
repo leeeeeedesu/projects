@@ -108,15 +108,7 @@
         heart.remove();
     }, 2000);
 }
-document.getElementById("yesBtn").addEventListener("click", async () => {
-    await fetch("https://my-surprise-qlfo.onrender.com/send-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ response: "Yes to your proposal" })
-    });
-    alert("Email request sent!");
-  });
-  
+
     function askAgain() {
         attempts++;
 

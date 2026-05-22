@@ -108,15 +108,7 @@
         heart.remove();
     }, 2000);
 }
-document.getElementById("yesBtn").addEventListener("click", async () => {
-    await fetch("https://my-surprise-qlfo.onrender.com/send-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ response: "Yes to your proposal" })
-    });
-    alert("Email request sent!");
-  });
-  
+
     function askAgain() {
         attempts++;
 
@@ -161,6 +153,18 @@ document.getElementById("yesBtn").addEventListener("click", async () => {
 
     noBtn.addEventListener('click', askAgain);
 </script>
+<button id="yesBtn">Yes</button>
+<script>
+  document.getElementById("yesBtn").addEventListener("click", async () => {
+    await fetch("http://localhost:3000/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ response: "Yes to your proposal" })
+    });
+    alert("Email request sent!");
+  });
+</script>
+
 
 </body>
 </html>
